@@ -779,6 +779,8 @@ Number
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
 
+The code is suitable for academic purposes, for persons with good knowlegde of Netlogo and PATH 4.0 methods. Contact author for application related work.
+
 ## PROGRESSION AND TRANSMISSiON OF HIV (PATH) 4.0 MODEL
 The model is calibrated to simulate HIV in the United States for the period 2010 to 2017. To run model, modify inputs on interface as needed. 
 Keep defaults on interface to generate 2010 to 2017 in US. 
@@ -827,6 +829,7 @@ Lab website:   https://diseasemodeling.github.io/
 Twitter: @chaitraGopalapa Instagram: @chaitra_gopalappa
 
 ### LICENSE
+The code is suitable for academic purposes, for persons with good knowlegde of Netlogo and PATH 4.0 methods. Contact author for application related work.
 
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
