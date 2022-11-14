@@ -6,11 +6,13 @@ Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/
 The code is suitable for academic purposes, for persons with good knowlegde of Netlogo and PATH 4.0 methods. Contact author for application related work.
 
 ## PROGRESSION AND TRANSMISSiON OF HIV (PATH) 4.0 MODEL
-The model is calibrated to simulate HIV in the United States for the period 2010 to 2017. To run model, modify inputs on interface as needed. 
-Keep defaults on interface to generate 2010 to 2017 in US. 
-For computational purposes, initial_infected can be set to a small number. initial_infected refers to population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+* The model is calibrated to simulate HIV in the United States for the period 2010 to 2017.
+* To run model, modify inputs on interface as needed. Keep defaults on interface to generate 2010 to 2017 in US. 
+* For computational purposes, initial_infected can be set to a small number. initial_infected refers to population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+* To simulate model beyond 2017, analyses correponding to changes in care can be conducted by updating input files in 'data' subfolder (see ReadMe file in folder for instructions). 
 
-Click 'RunExperiment' on interface to run model. Understanding of code and review of results will require good kno 
+* To run model click 'RunExperiment' on interface. Epidemic features are output in csv file, and contains data for everymonth of simulation. Analyses can be conducted using these results. Alternatively, the following app can be downloaded to review of key epidemic charts  
+[Download App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
 
 #### Four main modules (see Singh et. al., 2021) and corresponding .nls files
 1.  Disease progression module for simulating progression along disease and care continuum stages:     
