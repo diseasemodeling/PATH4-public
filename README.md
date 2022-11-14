@@ -41,10 +41,10 @@ National Institute of Allergy and Infectious Diseases of the National Institutes
 
 ### RELATED PUBLICATIONS
 
-2021 Eden, M., Castonguay, R., Munkbat*, B., Balasubramanian, H., Gopalappa, C., Agent-based evolving network modeling: a new simulation method for modeling low prevalence infectious diseases, Health Care Management Science, 24, 623–639 (2021). https://doi.org/10.1007/s10729-021-09558-0 
+Eden, M., Castonguay, R., Munkbat*, B., Balasubramanian, H., Gopalappa, C., Agent-based evolving network modeling: a new simulation method for modeling low prevalence infectious diseases, Health Care Management Science, 24, 623–639 (2021). https://doi.org/10.1007/s10729-021-09558-0 
 
 
-2021 Singh*, S., France, A. M., Chen, Y-H, Farnham, P. G., Oster, A. M., Gopalappa, C., Progression and Transmission of HIV (PATH4.0): A new agent-based evolving network simulation for modeling HIV transmission clusters; Mathematical Biosciences and Engineering, 18 (3), 2021 doi: 10.3934/mbe.2021109
+Singh*, S., France, A. M., Chen, Y-H, Farnham, P. G., Oster, A. M., Gopalappa, C., Progression and Transmission of HIV (PATH4.0): A new agent-based evolving network simulation for modeling HIV transmission clusters; Mathematical Biosciences and Engineering, 18 (3), 2021 doi: 10.3934/mbe.2021109
 
 Y. H. Chen, A. M. France, P. G. Farnham, S. L. Sansom, C. Gopalappa, A. Oster., Replicating HIV Transmission Clusters in a U.S. HIV Agent-Based Model[abstract]. In: Abstracts: SMDM 40th Annual Meeting; 2018 Oct; Montréal, Québec, Canada. 
 
