@@ -8,7 +8,7 @@ Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/
 * Open model in Netlogo
 * Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2010 to 2017 in US. 
 * For computational purposes, initial_infected can be set to a small number. initial_infected refers to population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
-* To simulate model beyond 2017, analyses correponding to changes in care can be conducted by updating input files in 'data' subfolder (see ReadMe file in folder for instructions). 
+* To simulate model beyond 2017, analyses correponding to changes in care can be conducted by updating input files in 'data' subfolder (see ReadMe file in subfolder for instructions). 
 
 * To run model click 'RunExperiment' on interface. Epidemic features are output in csv file, and contains data for everymonth of simulation. Analyses can be conducted using these results. Alternatively, the following app can be downloaded to visualize key epidemic metrics by transmisison-group and age-group  
 [Download PATHUI_App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
