@@ -6,15 +6,16 @@ Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/
 
 ## PROGRESSION AND TRANSMISSiON OF HIV (PATH) 4.0 MODEL
 * Open model in Netlogo
-* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2010 to 2017 in US. 
-* For computational purposes, initial_infected can be set to a small number. initial_infected refers to population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
-* To simulate model beyond 2017, analyses correponding to changes in care can be conducted by updating input files in 'data' subfolder (see ReadMe file in subfolder for instructions). 
+* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2010 to 2017 in US. See further instructions on Netlogo model interface
+* To simulate model beyond 2017, changes should be made specific to analyses of interest. 
+ * For analyses corresponding to changes in care continuum distributions because of changes in testing and care behaviors, input files in 'data' subfolder can be modified (see ReadMe file in subfolder for instructions). This feature can also be used for updating model to calibrate to surveillance for years past 2017, by using care continuum distributions from HIV surveillance reports. However, the model will assume no changes in other features such as sexual behavior (this will affect predictions over the COVID-19 era).  
+ * Several other analyses can be done with indepth knowledge of the model and methods.
 
 * To run model click 'RunExperiment' on interface. Epidemic features are output in csv file, and contains data for everymonth of simulation. Analyses can be conducted using these results. Alternatively, the following app can be downloaded to visualize key epidemic metrics by transmisison-group and age-group  
 [Download PATHUI_App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
-  * App installation instructions: after downloading app, during installation, it will ask for location of PATH model is. Go to folder where above PATH4 folder was downladed and select the .Netlogo file. To use app for visualze results, make sure the model has finished all runs.
+  * App installation instructions: after downloading app, during installation, it will ask for location of PATH model. Go to folder where above PATH4 folder was downloaded and select the .Netlogo file. The app reads in the files output from the simulation. Therefore, prior to use of the app for visualzing results, make sure the model has finished all runs. The app also has surveillance data for years 2010 to 2017 on several epidemic metrics and thus can be used for visualizing model fit for period 2010 to 2017, and visualizing results of any analyses post 2017. 
 
-#### Four main modules (see Singh et. al., 2021) and corresponding .nls files
+#### The general structure of PATH 4.0 is composed of four main modules (see Singh et. al., 2021 for methods), below are corresponding .nls files
 1.  Disease progression module for simulating progression along disease and care continuum stages:     
 "disease_progression.nls" "Data.nls" "testing-frequency.nls" "set-dropout-care.nls" "manage-care-continuum_juri.nls"  
 (called in PATH4main.nls--> call-DiseaseProg-Demographics) 
