@@ -12,7 +12,7 @@ Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/
 
 * To run model click 'RunExperiment' on interface. Epidemic features are output in csv file, and contains data for everymonth of simulation. Analyses can be conducted using these results. Alternatively, the following app can be downloaded to visualize key epidemic metrics by transmisison-group and age-group  
 [Download PATHUI_App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
-  * App installation instructions: after downloaing app, when installing it will ask for location of PATH model is. Go to folder where above PATH4 folder was downladed and select the .Netlogo file. To use app for visualze results, make sure the model has finished all runs.
+  * App installation instructions: after app download, during installation, it will ask for location of PATH model. Go to folder where above PATH4 model was downladed and select the BaseModel.Netlogo file. To use app for visualzing results, make sure the model has finished all runs.
 
 #### Four main modules (see Singh et. al., 2021) and corresponding .nls files
 1.  Disease progression module for simulating progression along disease and care continuum stages:     
