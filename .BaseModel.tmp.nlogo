@@ -629,10 +629,10 @@ PATH 4.0 INPUTS
 1
 
 TEXTBOX
-1107
-105
-1542
-377
+1110
+140
+1545
+412
 simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nDefault: \nsimulation-years 11\ntermination-ticks 240\n\nmaxRun: number of simulation iterations\ninitial-infected: HIV population size at first time-step of simulation. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017, as there are seevral years of dry run before start of 2010. Default of 3000 takes several hours per run on standard desktop computer. Computational time can be improved by parallel run on multiple core through use of BehaviorSPace (netlogo feature). For low computational testing, set value to a small number ~200. Although sometimes this can create an error if too small for intended distribution, however, probbaility of error is low for 200, so if it geenrates an error, just re-run. 
 13
 0.0
