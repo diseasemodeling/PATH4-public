@@ -632,8 +632,8 @@ TEXTBOX
 1110
 140
 1545
-300
-simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nDefault: \nsimulation-years 11\ntermination-ticks 240\n\nmaxRun: number of simulation iterations\ninitial-infected: HIV population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+380
+simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nDefault: \nsimulation-years 11\ntermination-ticks 240\n\nmaxRun: number of simulation iterations\ninitial-infected: HIV population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. Takes several hours per run. Computational time can be improved by parallel run through use of BehaviorSPace (netlogo feature). For low computational testing, set value to small number ~200, although sometimes this can create error if too small for intended distribution, however, probbaility of error  is low for 200, so if error, just re-run. 
 13
 0.0
 1
