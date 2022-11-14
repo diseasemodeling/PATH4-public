@@ -57,7 +57,7 @@ Lab website:   https://diseasemodeling.github.io/
 Twitter: @chaitraGopalapa Instagram: @chaitra_gopalappa
 
 ### LICENSE
-The code is suitable for academic purposes, for persons with good knowlegde of Netlogo and PATH 4.0 methods. Contact author for application related work.
+The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software. Contact author for any questions.
 
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
