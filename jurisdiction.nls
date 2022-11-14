@@ -52,7 +52,7 @@ to set_care_continuum_fixed
   let juri_data-VLS csv:from-file "data/VLS_juri-to-national_ratio_2017.csv"
   set matrix_VLS_juri matrix:from-row-list juri_data-VLS
 
-  ;same weight  
+  ;overwritten with same weight  
   let i 0
   while [i < length (matrix:get-column matrix_unaware_juri 0)][
     let j 0

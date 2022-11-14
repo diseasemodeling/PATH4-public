@@ -12,10 +12,10 @@ to setupECNA
    
   write-EpidemicFeatures-Header;in output-epidemic-features.nls
   ;write-EpidemicFeatures-Header-test;in tes-output-epidemic-features.nls
-  write-NetworkFeatures-Header;in output-epidemic-features.nls
+  ;write-NetworkFeatures-Header;in output-epidemic-features.nls
   write-age-mixing-header ;in write-mixing.nls
   write-risk-mixing-header ;in write-mixing.nls
-  write-risk-mixing-header-test ;in tes-write-mixing.nls
+  ;write-risk-mixing-header-test ;in tes-write-mixing.nls
   
   carefully [file-delete "ECNAdata.csv"][] 
   get-mats ;Stores all matrices for NN ;in ECNA.nls
@@ -77,8 +77,8 @@ to setup-ECNA-globals
     ]                 
     if ticks = 1 or ticks = termination-ticks - (simulation-years - index) * time-unit
     [
-      print (item (sexInd - 1) PLWH-start-year)
-      print item (sexInd - 1) total-US-pop-start-year
+      ;print (item (sexInd - 1) PLWH-start-year)
+      ;print item (sexInd - 1) total-US-pop-start-year
       set num-nodes replace-item (sexInd - 1) num-nodes (((count people with [dead = 0 and sex = sexInd] ) / (item (sexInd - 1) PLWH-start-year / item (sexInd - 1) total-US-pop-start-year )) - count susceptibles with [sex = sexInd and count my-links > 0])
       set PopSize replace-item (sexInd - 1) PopSize (item (sexInd - 1) num-nodes +  count susceptibles with [sex = sexInd])
     ]
@@ -206,7 +206,7 @@ to goECNA
     write-risk-group-mixing ;in write-epidemic-features-UI.nls 
     ]
     
-    write-NetworkFeatures ;in output-epidemic-features.nls
+    ;write-NetworkFeatures ;in output-epidemic-features.nls
     write-age-mixing 1 ;in write-mixing.nls
     write-age-mixing 2 ;in write-mixing.nls
     write-age-mixing 3 ;in write-mixing.nls

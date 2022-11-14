@@ -15,7 +15,7 @@ __includes
 
   ;# WRITE_OUPU0TS
   "write-output.nls" "write-output-headers.nls" ;"verify-plot.nls"
-  "Visualization.nls" "write-mixing.nls" "write-epidemic-features.nls"  "write-epidemic-features-UI.nls" ;
+  "Visualization.nls" "write-mixing.nls" "write-epidemic-features-UI.nls" ;
 
   "overrides_example.nls" "nooverride.nls"; needed for APP User interface
 ]
@@ -29,11 +29,12 @@ to runExperiment
   override;; needed for APP User interface
   nooverride ; needed for APP User interface
   reset-timer
- repeat 1[
+  let run_num 1
+  while [run_num <= maxRun][
     setupECNA
     repeat termination-ticks[runECNA]
-    print "timer"
-    print timer
+    print (list "completed run" run_num "of" maxRun "; timer" timer)
+    set run_num run_num + 1
   ]
 end
 @#$#@#$#@
@@ -329,10 +330,10 @@ dry-run
 Number
 
 INPUTBOX
-1922
-803
-1972
-863
+1037
+240
+1087
+300
 maxRun
 1.0
 1
@@ -628,12 +629,12 @@ PATH 4.0 INPUTS
 1
 
 TEXTBOX
-1115
-180
-1550
-236
-simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nActual : 11, and 240\n
-11
+1110
+140
+1545
+300
+simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nDefault: \nsimulation-years 11\ntermination-ticks 240\n\nmaxRun: number of simulation iterations\ninitial-infected: HIV population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+13
 0.0
 1
 
@@ -651,7 +652,7 @@ Number
 TEXTBOX
 957
 48
-1126
+1156
 93
 <---- RUN PATH 4.0
 20
@@ -775,35 +776,38 @@ jurisdiction-mixing-within
 Number
 
 @#$#@#$#@
+# PATH4-public
 ## GENERAL
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
-
-The code is suitable for academic purposes, for persons with good knowlegde of Netlogo and PATH 4.0 methods. Contact author for application related work.
+* The model is calibrated to simulate HIV in the United States for the period 2010 to 2017. 
 
 ## PROGRESSION AND TRANSMISSiON OF HIV (PATH) 4.0 MODEL
-The model is calibrated to simulate HIV in the United States for the period 2010 to 2017. To run model, modify inputs on interface as needed. 
-Keep defaults on interface to generate 2010 to 2017 in US. 
-For computational purposes, initial_infected can be set to a small number. initial_infected refers to population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+* Open model in Netlogo
+* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2010 to 2017 in US. 
+* For computational purposes, initial_infected can be set to a small number. initial_infected refers to population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+* To simulate model beyond 2017, analyses correponding to changes in care can be conducted by updating input files in 'data' subfolder (see ReadMe file in subfolder for instructions). 
 
-click 'RunExperiment' on interface to run model  
+* To run model click 'RunExperiment' on interface. Epidemic features are output in csv file, and contains data for everymonth of simulation. Analyses can be conducted using these results. Alternatively, the following app can be downloaded to visualize key epidemic metrics by transmisison-group and age-group  
+[Download PATHUI_App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
+  * App installation instructions: after downloaing app, when installing it will ask for location of PATH model is. Go to folder where above PATH4 folder was downladed and select the .Netlogo file. To use app for visualze results, make sure the model has finished all runs.
 
 #### Four main modules (see Singh et. al., 2021) and corresponding .nls files
-1.  Disease progression module for simulating progression along disease and care continuum stages: \    
-"disease_progression.nls" "Data.nls" "testing-frequency.nls" "set-dropout-care.nls" "manage-care-continuum_juri.nls"
+1.  Disease progression module for simulating progression along disease and care continuum stages:     
+"disease_progression.nls" "Data.nls" "testing-frequency.nls" "set-dropout-care.nls" "manage-care-continuum_juri.nls"  
 (called in PATH4main.nls--> call-DiseaseProg-Demographics) 
 
-2. Transmission module for simulating new infections: 
-transmissions-ECNA.nls 
-(called in PATH4main.nls --> infect-population)
+2. Transmission module for simulating new infections:   
+transmissions-ECNA.nls   
+(called in PATH4main.nls --> infect-population)  
 
-3.  HIV-ECNA network generation module for generating partnerships of newly infected nodes:
-"ECNA-generateNetwork-v2.nls" "contact-activation.nls" "dryrun.nls" 
-(called in PATH4main.nls -->  determine-node-neighbors)
+3.  HIV-ECNA network generation module for generating partnerships of newly infected nodes:  
+"ECNA-generateNetwork-v2.nls" "contact-activation.nls" "dryrun.nls"   
+(called in PATH4main.nls -->  determine-node-neighbors)  
 
-4. Compartmental module for simulating susceptible persons: 
-"age-functions.nls" "jurisdiction.nls" "riskGroupPreference.nls" 
-(called in PATH4main.nls --> age-population-yearly)
+4. Compartmental module for simulating susceptible persons:   
+"age-functions.nls" "jurisdiction.nls" "riskGroupPreference.nls"   
+(called in PATH4main.nls --> age-population-yearly)  
 
 ## CREDITS AND REFERENCES
 
@@ -1182,7 +1186,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.2
+NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

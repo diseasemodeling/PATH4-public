@@ -696,7 +696,7 @@ to setup-static-globals
   set current-no-care matrix:get-row matrix_noCare 0;0.39
   set current-care-noART matrix:get-row matrix_careNoART 0;0.16
   set current-ARTsuppressed matrix:get-row matrix_ARTVLS 0;0.19
-  set actual-age-dist-incidence matrix:get-row matrix_ageDistIncidence 0
+  ;set actual-age-dist-incidence matrix:get-row matrix_ageDistIncidence 0
   set care-at-diag  matrix:get-row matrix_LinkageToCare 0;0.77 
  ;set care-at-diag-ByAge  matrix:get-row matrix_LinkageToCare_ByAge 0;0.77 
   
