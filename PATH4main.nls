@@ -26,7 +26,6 @@ to setupECNA
   setup-static-globals ;procedure in global-initialization.nls
   set_juri_globals juri_model_num ;procedure in jurisdiction.nls
   
-  set maxTicks sim-dry-run + num-year-trans * time-unit
   set giant-start-node person 0
   
    
@@ -191,9 +190,6 @@ to goECNA
   if (ticks mod 12 = 0) [ 
     age-population-yearly;;in age-functions.nls
     
-    ;Used to assigning partnership type (may incorporate again later) ;not used as of 1/16/2020 ;in partnership-behavior.nls
-    ;reset-partnerships assign-sexual-behavior ;needs to be assigned before transmission but after degrees have been set ;should be called every timestep? 
-    
     ask people with [infected? = true and dead = 0][update-behavior]  ;in transmissions-ECNA.nls ;calculates partner-month of links yearly, as well as exposures per year for each node
     
     if ticks >= 0[; (termination-ticks - (simulation-years * time-unit) )[  
@@ -213,14 +209,7 @@ to goECNA
     write-age-mixing 4 ;in write-mixing.nls
     write-age-mixing 5 ;in write-mixing.nls
     write-age-mixing 6 ;in write-mixing.nls
-    
-;    write-EpidemicFeatures-test 0 ;HETF ;in output-epidemic-features.nls
-;    write-EpidemicFeatures-test 1 ;HETM ;in output-epidemic-features.nls
-;    write-EpidemicFeatures-test 2 ;MSM ;in output-epidemic-features.nls
-;    write-risk-group-mixing-test ;in write-mixing.nls
-    
-   
-  ] 
+   ] 
   
   ;; APPLY ECNA algorithm 
   ;print "infect-population"
@@ -260,19 +249,11 @@ to call-DiseaseProg-Demographics
   
     set-trans-rate
   ]
-;  
-; if ticks = (termination-ticks - 36) [ 
-;    set trans-prob-vaginal-insertive trans-prob-vaginal-insertive * TranFactor ;14 / 10000
-;    set trans-prob-vaginal-receptive trans-prob-vaginal-receptive * TranFactor;11 / 10000
-;    set trans-prob-anal-insertive trans-prob-anal-insertive * TranFactor; 35 / 10000
-;    set trans-prob-anal-receptive trans-prob-anal-receptive * TranFactor ;175 / 10000
-;  
-;    set-trans-rate
-;  ]
   
   ;;  PATH disease progression ;update-stage-props in main-code-helper-functions.nls
-  ifelse ticks < 0 [ manage-linkToCare manage-ART-post2015 manage-dropOut-post2015]; dry run
-  [ifelse ticks = 0 [update-stage-props 0]
+  ifelse ticks < 0 [ manage-linkToCare manage-ART-postCalibration manage-dropOut-postCalibration]; rates based testing and care- used for dry run- could also use for intervention analyses post calibration period
+  [
+    ifelse ticks = 0 [update-stage-props 0]
     [;let index first-year - 2006
       ifelse ticks < (termination-ticks - (simulation-years - index) * time-unit)
       [update-stage-props 0 + (index )];go back 'simulation-years' years from termination ticks. Everything before that is dryrun.
@@ -309,16 +290,7 @@ to call-DiseaseProg-Demographics
    ; set susceptible-age susceptible-age + 1
    age-up-susceptibles
   ]
-;  set num-exposed-sus 0
-;  ask people[
-;    ;set CD4-count 50
-;    let sus-link link-neighbors with [breed = susceptibles]
-;    ask sus-link
-;    [set contacts? true]
-;  ]
-;  set num-exposed-sus count susceptibles with [contacts? = true]
-;  ;layout-ECNA ECNA-links
-;  
+
   
   ask people with [ AIDS? = true or CD4-count <= 200 ][
     if ticks = time-at-diagnosis[

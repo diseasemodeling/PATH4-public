@@ -14,10 +14,10 @@ __includes
   "age-functions.nls" "jurisdiction.nls" "riskGroupPreference.nls" ; ## DEMOGRAPHICS risk groups selections
 
   ;# WRITE_OUPU0TS
-  "write-output.nls" "write-output-headers.nls" ;"verify-plot.nls"
-  "Visualization.nls" "write-mixing.nls" "write-epidemic-features-UI.nls" ;
+ "write-mixing.nls" "write-epidemic-features-UI.nls" ;PATH 4.0
+  "write-output.nls" "write-output-headers.nls" "Visualization.nls" ;PATH 2.0 and 3.0 (useful fopr senistivity analyses setup)
 
-  "overrides_example.nls" "nooverride.nls"; needed for APP User interface
+  "overrides_example.nls" "nooverride.nls"; needed for PATHUI- output visualization app
 ]
 
 ;; Extensions of NetLogo used
@@ -26,8 +26,8 @@ extensions [py py matrix csv profiler table rnd]
 
 ;;PATH4.0
 to runExperiment
-  override;; needed for APP User interface
-  nooverride ; needed for APP User interface
+  override;; needed for PATHUI- output visualization app
+  nooverride ; needed for PATHUI- output visualization app
   reset-timer
   let run_num 1
   while [run_num <= maxRun][
@@ -86,17 +86,6 @@ PENS
 "350-500" 1.0 0 -5825686 true "" ""
 ">500" 1.0 0 -10899396 true "" ""
 
-INPUTBOX
-1774
-804
-1861
-864
-number-people
-1000.0
-1
-0
-Number
-
 PLOT
 699
 942
@@ -119,10 +108,10 @@ PENS
 "Heterosexual-male" 1.0 0 -10899396 true "" ""
 
 INPUTBOX
-1038
-176
-1100
-236
+1032
+113
+1098
+173
 time-unit
 12.0
 1
@@ -253,228 +242,26 @@ count people with [stage = 2 and dead = 0 and index? = true and new-infections =
 11
 
 INPUTBOX
-1775
-863
-1855
-923
-num-year-trans
-25.0
-1
-0
-Number
-
-INPUTBOX
-1924
-864
-1974
-924
-goal
-1.0
-1
-0
-Number
-
-INPUTBOX
-1778
-987
-1886
-1047
-prep-effectiveness
-0.0
-1
-0
-Number
-
-INPUTBOX
-1884
-926
-1981
-986
-prep-cov-positive
-0.0
-1
-0
-Number
-
-INPUTBOX
-1888
-986
-1982
-1046
-prep-cov-casual
-0.0
-1
-0
-Number
-
-INPUTBOX
-1776
-927
-1888
-987
-prep-cov-concurrent
-0.0
-1
-0
-Number
-
-INPUTBOX
-1867
-803
-1920
-863
-dry-run
-0.0
-1
-0
-Number
-
-INPUTBOX
-1037
-240
-1087
-300
+1033
+174
+1097
+234
 maxRun
 1.0
 1
 0
 Number
 
-BUTTON
-834
-306
-928
-339
-NIL
-setupECNA
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-2083
-870
-2250
-903
-NIL
-layout-ECNA Ttree-links\n
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-933
-306
-1029
-339
-NIL
-runECNA
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
 INPUTBOX
-938
-238
-1036
-298
+1003
+610
+1101
+670
 maxDegree
 128.0
 1
 0
 Number
-
-TEXTBOX
-2252
-806
-2976
-904
-ECNA COLOR CODE\ngreen nodes: susceptible\nred nodes: infected and unaware\nblue nodes: infected and aware\nnode labels: [time-at-infection time-at-diagnosis]\nnumber on node die: stage (1- acute; 2- unaware;  3- aware-not-in-care; 4- aware-incare-noART; 5 -ART-noVLS; 6 -ART-VLS
-11
-0.0
-1
-
-BUTTON
-2081
-800
-2247
-833
-layout- cluster links
-layout-ECNA Ptree-links
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-2082
-834
-2248
-867
-layout- transmisison links
-layout-ECNA Ttree-links\n
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-TEXTBOX
-2263
-1082
-2459
-1139
-Red- cluster links\nThick grey- transmission links
-15
-0.0
-1
-
-TEXTBOX
-2258
-903
-2859
-1041
-Clustering color code:\nRed links: if total distance < evolution-time-window\n\nRed nodes: acute phase (within past 3 months)\nYellow nodes: recent infections (within past 6 months)\n\nOnly clusters with atleast two persons diagnosed in past 'time-window' months are considered for reporting for comparing to surveillance\nclusters with blue and gray nodes: are part of surveillance clusters \nclusters with green nodes: not in surveillance cluster\n
-11
-0.0
-1
-
-TEXTBOX
-2268
-1121
-2418
-1149
-IDENTIFY color code for intervention clusters:
-11
-0.0
-1
 
 MONITOR
 1420
@@ -556,10 +343,10 @@ first-year
 0
 
 INPUTBOX
-837
-177
-932
-237
+847
+176
+942
+236
 simulation-years
 11.0
 1
@@ -567,21 +354,21 @@ simulation-years
 Number
 
 INPUTBOX
-838
-240
-936
-300
+847
+118
+935
+178
 initial-infected
-200.0
+1000.0
 1
 0
 Number
 
 INPUTBOX
-933
-176
-1033
-236
+941
+175
+1032
+235
 termination-ticks
 240.0
 1
@@ -609,16 +396,6 @@ PATH 2.0 and PATH 3.0 Inputs
 1
 
 TEXTBOX
-2083
-780
-2385
-808
-PATH 4.0 ADHOC TESTING THROUGH VISUALIZATION
-11
-0.0
-1
-
-TEXTBOX
 832
 97
 982
@@ -629,20 +406,20 @@ PATH 4.0 INPUTS
 1
 
 TEXTBOX
-1110
-140
-1545
-300
-simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nDefault: \nsimulation-years 11\ntermination-ticks 240\n\nmaxRun: number of simulation iterations\ninitial-infected: HIV population size prior to dryrun. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017. 
+1105
+51
+1902
+375
+*simulation-years: number of years to simulate from year 2006;\n*maxRun: number of simulation iterations\n*initial-infected: HIV population size prior to dryrun. \n*dry_run_1_duration: dry run for intiating network dynamics, clock will not update during this period\n(duration of dry-run 2: defined in model as = termination ticks - (simulation-years * time-unit) dry run for initializating epidemic and network feature dynamics; clock will update during this period.) \n*time-unit: 12 implies time step is monthly\n*first-year: first year of simulation after both dry runs.\n\nDefaults: \n*first-year: 2006\n*simulation-years: 11 (so will simulate 2006 to 2017)\n*termination-ticks: 240\n*dry_run_1_duration: 50\n*initial-infected: 1000 (take ~30 mins for 30 runs parallel run using Netlogo BehaviorSPace on Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz).(Generates ~400 HIV infected persons by end of simulation). For low computational testing, set value to small number ~200, although sometimes this can create an error if sample is too small for intended distribution, however, probbaility of error is low for 200, so if error, just re-run. 
 13
 0.0
 1
 
 INPUTBOX
-829
-118
-936
-178
+945
+239
+1099
+299
 dry_run_1_duration
 50.0
 1
@@ -650,31 +427,31 @@ dry_run_1_duration
 Number
 
 TEXTBOX
-957
-48
-1156
-93
+950
+29
+1149
+74
 <---- RUN PATH 4.0
 20
 0.0
 1
 
 INPUTBOX
-968
-387
-1065
-447
+975
+670
+1072
+730
 num-jurisdictions
-25.0
+50.0
 1
 0
 Number
 
 INPUTBOX
-1069
-386
-1162
-446
+1076
+669
+1169
+729
 juri_model_num
 1.0
 1
@@ -682,26 +459,15 @@ juri_model_num
 Number
 
 SWITCH
-833
-347
-994
-380
+840
+630
+1001
+663
 concurrency-model
 concurrency-model
 0
 1
 -1000
-
-INPUTBOX
-1145
-451
-1215
-511
-TranFactor
-1.2
-1
-0
-Number
 
 BUTTON
 838
@@ -721,62 +487,39 @@ NIL
 1
 
 INPUTBOX
-830
-449
-896
-509
-cluster_juri
+839
+669
+971
+729
+jurisdiction-mixing-within
+0.77
+1
+0
+Number
+
+TEXTBOX
+861
+586
+1207
+624
+Network features. Keep at default
+15
+0.0
+1
+
+INPUTBOX
+1789
+806
+1844
+866
+goal
 1.0
 1
 0
 Number
 
-INPUTBOX
-901
-450
-983
-510
-cluster_prop1
-0.7
-1
-0
-Number
-
-INPUTBOX
-989
-451
-1069
-511
-cluster_prop2
-0.0
-1
-0
-Number
-
-INPUTBOX
-1071
-452
-1145
-512
-dist_cluster
-0.7
-1
-0
-Number
-
-INPUTBOX
-832
-386
-964
-446
-jurisdiction-mixing-within
-0.8
-1
-0
-Number
-
 @#$#@#$#@
-# PATH4-public
+# PATH 4
 ## GENERAL
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
@@ -1186,10 +929,32 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.1.1
+NetLogo 6.2.2
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="experiment" repetitions="30" runMetricsEveryStep="true">
+    <setup>setupECNA</setup>
+    <go>runECNA</go>
+    <exitCondition>ticks &gt; termination-ticks</exitCondition>
+    <enumeratedValueSet variable="initial-infected">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="maxDegree">
+      <value value="128"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="maxRun">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="time-unit">
+      <value value="12"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="termination-ticks">
+      <value value="240"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default

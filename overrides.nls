@@ -1,5 +1,3 @@
 to override
-  set initial-infected 100
-  set maxRun 1
-  set simulation-years 11
+  ;; empty
 end

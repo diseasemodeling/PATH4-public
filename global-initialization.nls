@@ -18,12 +18,12 @@ globals
   numActsConHET
   initial-infection-percent
   
-  ;; Model specific variables, tracking time and common variable length 
+  ;; PATH 2.0 and 3.0 Model specific variables, tracking time and common variable length 
   t-start
   start-year
   calibration-year
   tick-start
-  sim-dry-run
+  ;sim-dry-run
   tempRun
   maxTicks
   maxYear
@@ -47,7 +47,7 @@ globals
   ptnr-UB
   ptnr-LB
   
-  ;; Intermediate variables trakcing transmission rate and prevalence
+  ;;PATH 2.0 and 3.0 Intermediate variables trakcing transmission rate and prevalence
   count-trans-by-stage
   count-trans-by-sex
   count-trans-by-age
@@ -144,13 +144,14 @@ globals
   num-sensitive-range-var
   
   ;; Initialization variables for 2006 data
+  number-people
   pop-by-age
   HET-high-risk-factor
   overall-prevalence
   perc-HET-FEM
   perc-HET-MEN
   perc-MSM
-  perc-IDU-FEM
+  perc-IDU-FEM 
   perc-IDU-MEN
   perc-IDU-MSM
   num-HET-FEM
@@ -302,9 +303,9 @@ globals
   test-median
   test-3Q
   test-max
-  test-freq-pre2015
-  test-freq-post2015
-  test-freq-post2015-cohort
+  test-freq-preCalibration
+  test-freq-postCalibration
+  test-freq-postCalibration-cohort
   initial-drop-out
   prob-reEnter
   dropOut-rate
@@ -1103,7 +1104,7 @@ to setup-static-globals
   ;set non-AIDS-death item (min-age - 10) define-non-AIDS-death
   set discount-rate 0.03
   
-  ;testing
+  ;testing; Not used in Base PATH 4.0- where testing is calibrated to surveillance care continuum distribution; useful for testing interventnions 
   set freq-MSM 1
   set freq-HET 5
   set test-min [1 1 1 1 1 1]
@@ -1111,9 +1112,9 @@ to setup-static-globals
   set test-median [30 59 36 24 35 25]
   set test-3Q [102 138 89 65 98 88]
   set test-max [174 217 142 106 162 150]
-  set test-freq-pre2015 60
-  set test-freq-post2015 100 ; base 100
-  set test-freq-post2015-cohort 100
+  set test-freq-preCalibration 60
+  set test-freq-postCalibration 100 ; base 100
+  set test-freq-postCalibration-cohort 100
   set freq-at-least-once 2
   set freq-no-test 10
   set prob-compliance 0.4
@@ -1655,7 +1656,7 @@ to set-num-population
   
   set perc-HET-FEM 0.5 * HET-high-risk-factor * (1 - (perc-IDU-FEM + perc-IDU-MEN + perc-MSM + perc-IDU-MSM))
   set perc-HET-MEN perc-HET-FEM
-  
+  set number-people 1000
   set num-HET-FEM (perc-HET-FEM * number-people / overall-prevalence)
   set num-HET-MEN num-HET-FEM
   set num-MSM (perc-MSM * number-people / overall-prevalence) ;; assuming 2% of US population are MSM

@@ -16,7 +16,7 @@ to manage-undiag [i]
 
     let agent-set-to-pick []
     set agent-set-to-pick rnd:weighted-n-of val total-unaware-nonacute [ 
-      item (return-age-index age) age-weighted-aware + 1 / matrix:get matrix_unaware_juri locationID (sex - 1)] ;; weighting by jurisdition and age; shoudl work even if num-juris = 1 because then all will get same weight becasue of same locationID
+      item (return-age-index age) age-weighted-aware] ;+ 1 / matrix:get matrix_unaware_juri locationID (sex - 1)] ;; weighting by jurisdition and age; shoudl work even if num-juris = 1 because then all will get same weight becasue of same locationID
                                                                                                                ;age-weighted-aware ;surveillance; global-initialization.nls
                                                                                                                ;matrix_unaware_juri value is 1 in default; jurisdiction.nls ; jurisditional sensitivity analyses
     ask n-of (val) agent-set-to-pick
@@ -32,12 +32,8 @@ to manage-undiag [i]
       set-testing-variables
       set-ART-variables
       set next-test ticks
-      
-;      ifelse ticks > termination-ticks - 8 * time-unit and ticks < termination-ticks - 3 * time-unit 
-;      [set next-test ticks + delay_test];; setting time at testing to extract values
-;      [set next-test ticks]  
-                            ; print 1
-                            ;;assigning costs because update-simulation was done earlier to this
+      ; print 1
+      ;;assigning costs because update-simulation was done earlier to this
       set test-cost cost-testing
       set costs costs + cost-testing
       set undiscounted-Total-costs undiscounted-Total-costs + cost-testing
@@ -54,14 +50,9 @@ to manage-no-care [i]
   
   let val count total-nocare - (count (item i total-people-sex) * item i current-no-care)  
   if val > 0
-  [  ; ask n-of (abs val) total-nocare 
-    let agent-set-to-pick []
-    set agent-set-to-pick rnd:weighted-n-of val total-nocare[ 
-      matrix:get matrix_VLS_juri locationID (sex - 1) ;; weighting by jurisdition and age; shoudl work even if num-juris = 1 because then all will get same weight becasue of same locationID
-    ]
-    
-    ask n-of (val) agent-set-to-pick
-    [
+  [  
+    ask n-of (abs val) total-nocare 
+      [
       if not linked-to-care? ;; if not linked to care originally link to care
       [
         set linked-to-care? true
@@ -136,11 +127,8 @@ to manage-VLS-dropOut [i]
   let val (count total-VLS) - (item i current-ARTsuppressed * count (item i total-people-sex)) 
   if val > 0
   [
-    ;ask n-of (val) total-VLS 
-    let agent-set-to-pick rnd:weighted-n-of val total-VLS  [(1 - item (return-age-index age) age-weighted-VLS) + 1 / matrix:get matrix_VLS_juri locationID (sex - 1) ];;;pick val number of people to drop-out weighted by (1 -age-weighted-VLS)
-                                                                                                                                                                     ; weighting by jurisdition and age; shoudl work even if num-juris = 1 because then all will get same weight becasue of same locationID
-    ask n-of (val) agent-set-to-pick
-    [
+    ask n-of (val) total-VLS 
+       [
       set-dropout-care
       set stage 3
     ]
@@ -165,9 +153,10 @@ to manage-not-VLS-dropOut [i]
   
 end  
 
+;; Below procedures are useful if needed to simulate rate based testing and drop out (instead of calibrating to care continuum distributions- default PATH 4 method). IN default PATH 4.0 using it in dry run 1
 to manage-linkToCare
   
-  ask total-people with [stage = 3 and CD4-count <= CD4-at-care and trans-year >= dry-run + calibration-year - start-year + 1]
+  ask total-people with [stage = 3 and CD4-count <= CD4-at-care and trans-year >= termination-ticks - ( calibration-year - start-year)]
   [
     set stage 4
     if not linked-to-care? ;; if not linked to care originally link to care
@@ -179,7 +168,7 @@ to manage-linkToCare
   ]
 end
 
-to manage-ART-post2015
+to manage-ART-postCalibration
   
   ask total-people with [stage = 4 and CD4-count <= CD4-to-start-ART]
   [
@@ -194,10 +183,10 @@ to manage-ART-post2015
   
 end
 
-to manage-dropOut-post2015
+to manage-dropOut-postCalibration
   
-  let total-inCare total-people with [stage >= 5 and trans-year != dry-run + calibration-year - start-year + 1 and dead = 0]
-  let total-inCare-cohort total-people with [stage >= 5 and trans-year = dry-run + calibration-year - start-year + 1 and dead = 0]
+  let total-inCare total-people with [stage >= 5 and trans-year != termination-ticks - ( calibration-year - start-year) + 1 and dead = 0]
+  let total-inCare-cohort total-people with [stage >= 5 and trans-year = termination-ticks - (calibration-year - start-year) + 1 and dead = 0]
   let dropOutFactor 0.5
   
   ask total-inCare

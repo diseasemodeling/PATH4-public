@@ -83,7 +83,7 @@ end
 
 to set-risk-group-ECNA 
   
-  let refSexInd 3 ; as MSM is largest
+  let refSexInd 1 ; based on evaluating fit
   let totRefGroup count people with [infected? = true and dead = 0 and sex = refSexInd]
   let totalPop totRefGroup /((item (refSexInd - 1) sex-dist-target) ) ;; determine number PLWH people needed in simulation
   
@@ -489,17 +489,8 @@ to set-infected-variables
   set acute-stg-length  0
   set time-at-diagnosis 0
   set time-at-infection ticks
-  set trans-year ceiling ((ticks - sim-dry-run + 1) / time-unit)
+  set trans-year ceiling ((ticks + 1) / time-unit)
   
-  ;; moved to initialize-transmissions
-  ;  if trans-year >= dry-run + calibration-year - start-year + 1
-  ;  [set-next-test] ;; WAS using this if people tested based on frequency of test instead of saying diagnosed people such that 20% are unaware
-  ;  
-  ;;SET INTIAL VALUES OF SIMULATION VARIABLES: values on first quarter of infection
-  
-  ;      let cum-age [0.05822441 0.211509082 0.514938041 0.842047191 0.96740791 1]
-  ;
-  ;set age (floor(min-age + ticks / 4))
   set age-at-infection age
   ; carefully [
   set non-AIDS-death (item (age - 10) define-non-AIDS-death) * (time-unit / 12)

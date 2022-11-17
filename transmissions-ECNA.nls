@@ -34,9 +34,6 @@ to infect-population ;
         ((1 - (1 - condom) * trans-rate-anal) ^ (exposures-per-partner * prob-anal-sex * protected-acts-in-month)) 
         ; * ((1 - trans-needle) ^ num-needles-shared-main))
      let prob-of-infection 1 - prob-no-infection
-     ; if ticks > termination-ticks - 5 * time-unit  and (source-infection-sex = 1 or source-infection-sex = 3)[set prob-of-infection prob-of-infection * TranFactor]
-       if ticks > termination-ticks - 3 * time-unit   [set prob-of-infection prob-of-infection * TranFactor]
-     ; if ticks = 0 [set prob-of-infection 1 ];;assuming 1 for dry-run of network so that it does not impact network growth
 
       ask receivers[
 ;      

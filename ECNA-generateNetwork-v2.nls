@@ -134,14 +134,7 @@ to create-sexual-network [my_output low-bound high-bound myLocID numAges sex-of-
   while [j < num-new-contacts]
   [
     let desired-neighbor-degree1 desired-neighbor-degree-calc my_output low-bound high-bound
-    ifelse desired-neighbor-degree1 > 1
-    [
-      ;set eligible-agents-count eligible-agents-count + 1
-    ]
-    [
-      ;set eligible-nonagents-count eligible-nonagents-count + 1
-      set desired-neighbor-degree1 2
-    ]
+    if desired-neighbor-degree1 <= 1 [set desired-neighbor-degree1 2]
     set desired-neighbor-degree-list lput desired-neighbor-degree1 desired-neighbor-degree-list
     set j j + 1
   ]
@@ -191,37 +184,24 @@ to create-sexual-network [my_output low-bound high-bound myLocID numAges sex-of-
         
         set eligible-agents-count eligible-agents-count + sum-eligible-agents ;NOT USED FOR SELECTION ALGO; INFORMATIONAL USE TO UNDERSTAND SIZE  COMPARED WITH NON_AGENTS
         
-        ;let eligible-nonagents matrix:get susceptible-degree-dist 0 chosen-bin
         
         let index-of-age-group return-age-index age-of-neighbor ;;calls return-age-index in age-functions.nls
         let eligible-nonagents 0
         
         ;;ASSUME ENDLESS SUPPLY OF NON_AGENTS IN EACH JURI- WORKS AS HIV IS LOW PREVALENCE AND JURIS ARE PSEUDO IN PATH 4-2021 PUBLICATION. FUTURE VERSIONS HAVE COMPARTMENTAL MODEL ALSO SPLIT BY JURIS  
+         ;let eligible-nonagents matrix:get susceptible-degree-dist-mat index-of-age-group chosen-bin 
         if sex-of-neighbor  = 1 or sex-of-neighbor = 4 [set eligible-nonagents (matrix:get susceptible-degree-dist-mat-HETF index-of-age-group chosen-bin) / num-jurisdictions ] ; HETF
         if sex-of-neighbor  = 2 or sex-of-neighbor = 5 [set eligible-nonagents (matrix:get susceptible-degree-dist-mat-HETM index-of-age-group chosen-bin) / num-jurisdictions] ;HETM
         if sex-of-neighbor  = 3 or sex-of-neighbor = 6 [set eligible-nonagents (matrix:get susceptible-degree-dist-mat-MSM index-of-age-group chosen-bin) / num-jurisdictions]  ;MSM
         
-        ;let eligible-nonagents matrix:get susceptible-degree-dist-mat index-of-age-group chosen-bin 
         set eligible-nonagents-count eligible-nonagents-count + eligible-nonagents ;NOT USED FOR SELECTION ALGO; INFORMATIONAL USE TO UNDERSTAND SIZE  COMPARED WITH AGENTS
         
         ;;DETERMINE IF NEW PARTNER IS SELECTED FROM AGENT OR NON_AGENT
         if sum-eligible-agents + eligible-nonagents > 0[ 
-          ifelse random (sum-eligible-agents + eligible-nonagents) > eligible-nonagents or (sum-eligible-agents > 0 and  ticks > termination-ticks - (simulation-years - (first-year - 2006))   * time-unit
-            and ((myLocID < cluster_juri * num-jurisdictions and random-float 1 < cluster_prop1) or (myLocID >= cluster_juri * num-jurisdictions and random-float 1 < cluster_prop2)))[ ;prob of choosing among agents weighted according to additional network features;; USEFUL FOR SENSITIVITY TEST OF CLUSTERS
-                                                                                                                                                                                        ;   ifelse random (sum-eligible-agents + eligible-nonagents) > eligible-nonagents or (sum-eligible-agents > 0  and random-float 1 < 0.2)[ ;equal prob of choosing eligible agents and non-agents
+          ifelse random (sum-eligible-agents + eligible-nonagents) > eligible-nonagents 
+            [                                                                                                                                                                             ;equal prob of choosing eligible agents and non-agents
             set selected-agents selected-agents + 1 
-            ifelse random-float 1 < dist_cluster and ticks > termination-ticks - (simulation-years - (first-year - 2006)) * time-unit ;;chance of clustering 
-            [set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID + 1 / (1 + min (list nw:distance-to turtle infected-node-who 100000))]] ;; randomly pick a susceptible agent weighted by their locationID using location-mixing matrix only or additionally weighted by distance to node
-            [set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID ]]                                                                                                     
-            
-            ask new-contacts[
-              ;  set age-hold-value item j age-hold
-              ;              let templist matrix:get-row age-link-active 0
-              ;              ;print templist
-              ;              matrix:set-row Nmatrix j templist
-              ;              ;print Nmatrix
-              ; set num-new-contacts-who lput who num-new-contacts-who
-            ]
+            set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID]
           ]
           [
             set selected-nonagents selected-nonagents + 1

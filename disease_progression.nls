@@ -686,7 +686,7 @@ to set-dead
    
   if dead = 1 and prev-dead = 0 ;and index-patient? = true
   [  
-    set dead-year ceiling((ticks - sim-dry-run) / time-unit)
+    set dead-year ceiling((ticks) / time-unit)
     set-life-variables
    ; die
   ]
@@ -967,7 +967,7 @@ to set-ART-variables
   [set regimen4-dur 1 + floor (ln (random-float 1) / (- item 3 rate-viral-rebound / time-unit))] 
     
 end
-
+;;COSTS HAVE NOT BEEN UPDATED IN PATH 4.0
 ;to set-discounted-life ;not used 4/4/2020
 ;  
 ;  set discounted-life (discounted-life + ((1 - dead) / discount-rate-factor))
