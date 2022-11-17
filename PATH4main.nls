@@ -49,7 +49,7 @@ to runECNA
   ;print "done"
 end
 
-to clear ;Not used - leaving in as a precaution
+to clear 
   clear-all
   file-close-all 
 end
