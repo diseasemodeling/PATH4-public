@@ -406,19 +406,11 @@ PATH 4.0 INPUTS
 1
 
 TEXTBOX
-<<<<<<< HEAD
 1105
 51
 1902
 375
 *simulation-years: number of years to simulate from year 2006;\n*maxRun: number of simulation iterations\n*initial-infected: HIV population size prior to dryrun. \n*dry_run_1_duration: dry run for intiating network dynamics, clock will not update during this period\n(duration of dry-run 2: defined in model as = termination ticks - (simulation-years * time-unit) dry run for initializating epidemic and network feature dynamics; clock will update during this period.) \n*time-unit: 12 implies time step is monthly\n*first-year: first year of simulation after both dry runs.\n\nDefaults: \n*first-year: 2006\n*simulation-years: 11 (so will simulate 2006 to 2017)\n*termination-ticks: 240\n*dry_run_1_duration: 50\n*initial-infected: 1000 (take ~30 mins for 30 runs parallel run using Netlogo BehaviorSPace on Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz).(Generates ~400 HIV infected persons by end of simulation). For low computational testing, set value to small number ~200, although sometimes this can create an error if sample is too small for intended distribution, however, probbaility of error is low for 200, so if error, just re-run. 
-=======
-1107
-105
-1542
-377
-simulation-years = number of years to simulate from year 2006;\nduration of dry-run 2  = termination ticks - (simulation-years * time-unit)\n\nDefault: \nsimulation-years 11\ntermination-ticks 240\n\nmaxRun: number of simulation iterations\ninitial-infected: HIV population size at first time-step of simulation. Default of 3000 generates ~9000 to 11000 HIV infected persons between 2010 to 2017, as there are seevral years of dry run before start of 2010. Default of 3000 takes several hours per run on standard desktop computer. Computational time can be improved by parallel run on multiple core through use of BehaviorSPace (netlogo feature). For low computational testing, set value to a small number ~200. Although sometimes this can create an error if too small for intended distribution, however, probbaility of error is low for 200, so if it geenrates an error, just re-run. 
->>>>>>> 151f08bf9f47f3d2135066e9498112c7dd9dd89b
 13
 0.0
 1
@@ -527,26 +519,22 @@ goal
 Number
 
 @#$#@#$#@
-<<<<<<< HEAD
-# PATH 4
-=======
 # PROGRESSION AND TRANSMISSION OF HIV (PATH) 4.0 MODEL
->>>>>>> 151f08bf9f47f3d2135066e9498112c7dd9dd89b
 ## GENERAL
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
-	* The model is calibrated to simulate HIV in the United States for the period 2010 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
+* The model is calibrated to simulate HIV in the United States for the period 20o6 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
 
 ## COMPUTATIONAL
 * Open model in Netlogo
-* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2010 to 2017 in US. See further instructions on Netlogo model interface
+* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2006 to 2017 in US. See further instructions on Netlogo model interface
 * To simulate model beyond 2017, changes should be made specific to analyses of interest. 
   * For analyses corresponding to changes in care continuum distributions from changes in testing and care behaviors, input files in 'data' subfolder can be modified (see ReadMe file in 'data' subfolder for instructions). This feature can also be used for updating model to calibrate to surveillance for years past 2017, by using care continuum distributions from HIV surveillance reports for each year. However, the model will assume no changes in other features such as sexual behavior (this will affect predictions over the COVID-19 era).  
   * Several other analyses can be done with indepth knowledge of the model and methods.
 
 * To run model click 'RunExperiment' on interface. Epidemic features are output in csv files, and contains data for everymonth of simulation. Analyses can be conducted using these csv files. Alternatively, the following app can be downloaded to visualize key epidemic metrics by transmisison-group and age-group  
 [Download PATHUI_App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
-  * App installation instructions: after downloading app, during installation, it will ask for location of PATH model. Go to folder where above PATH4 folder was downloaded and select the .Netlogo file. The app reads in the files output from the simulation. Therefore, prior to use of the app for visualzing results, make sure the model has finished all runs. The app also has surveillance data for years 2010 to 2017 on several epidemic metrics and thus can be used for visualizing model fit for period 2010 to 2017, and visualizing results of any analyses post 2017. 
+  * App installation instructions: after downloading app, during installation, it will ask for location of PATH model. Go to folder where above PATH4 folder was downloaded and select the .Netlogo file. The app reads in the files output from the simulation. Therefore, prior to use of the app for visualzing results, make sure the model has finished all runs. The app also has surveillance data for years 2006 to 2017 on several epidemic metrics and thus can be used for visualizing model fit for period 2006 to 2017, and visualizing results of any analyses post 2017. 
 
 ## METHODS
 #### The general structure of PATH 4.0 is composed of four main modules (see related publications for mathematical methods), below are corresponding .nls files
