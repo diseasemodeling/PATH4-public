@@ -2,18 +2,18 @@
 ## GENERAL
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
-* The model is calibrated to simulate HIV in the United States for the period 2010 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
+* The model is calibrated to simulate HIV in the United States for the period 20o6 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
 
 ## COMPUTATIONAL
 * Open model in Netlogo
-* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2010 to 2017 in US. See further instructions on Netlogo model interface
+* Modify inputs on interface as needed. Keep defaults on interface to generate HIV representative of years 2006 to 2017 in US. See further instructions on Netlogo model interface
 * To simulate model beyond 2017, changes should be made specific to analyses of interest. 
   * For analyses corresponding to changes in care continuum distributions from changes in testing and care behaviors, input files in 'data' subfolder can be modified (see ReadMe file in 'data' subfolder for instructions). This feature can also be used for updating model to calibrate to surveillance for years past 2017, by using care continuum distributions from HIV surveillance reports for each year. However, the model will assume no changes in other features such as sexual behavior (this will affect predictions over the COVID-19 era).  
   * Several other analyses can be done with indepth knowledge of the model and methods.
 
 * To run model click 'RunExperiment' on interface. Epidemic features are output in csv files, and contains data for everymonth of simulation. Analyses can be conducted using these csv files. Alternatively, the following app can be downloaded to visualize key epidemic metrics by transmisison-group and age-group  
 [Download PATHUI_App](https://people.umass.edu/chaitrag/Research/PATH-App/PATHUISetup.exe)
-  * App installation instructions: after downloading app, during installation, it will ask for location of PATH model. Go to folder where above PATH4 folder was downloaded and select the .Netlogo file. The app reads in the files output from the simulation. Therefore, prior to use of the app for visualzing results, make sure the model has finished all runs. The app also has surveillance data for years 2010 to 2017 on several epidemic metrics and thus can be used for visualizing model fit for period 2010 to 2017, and visualizing results of any analyses post 2017. 
+  * App installation instructions: after downloading app, during installation, it will ask for location of PATH model. Go to folder where above PATH4 folder was downloaded and select the .Netlogo file. The app reads in the files output from the simulation. Therefore, prior to use of the app for visualzing results, make sure the model has finished all runs. The app also has surveillance data for years 2006 to 2017 on several epidemic metrics and thus can be used for visualizing model fit for period 2006 to 2017, and visualizing results of any analyses post 2017. 
 
 ## METHODS
 #### The general structure of PATH 4.0 is composed of four main modules (see related publications for mathematical methods), below are corresponding .nls files
