@@ -120,6 +120,7 @@ to set-initial-age-ECNA [sexInd ]
         let a age
         set breed susceptibles 
         set susceptible-age a
+        ask my-Ttree-links [set breed ECNA-links]
       ]
     ]
      ;;ELSE if fewer peple than needed add them from existing susceptibles if that age is available, and if not, create new people 
