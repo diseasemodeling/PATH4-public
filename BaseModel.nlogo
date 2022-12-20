@@ -32,7 +32,7 @@ to runExperiment
   let run_num 1
   while [run_num <= maxRun][
     setupECNA
-    repeat termination-ticks[runECNA]
+    repeat termination-ticks[runECNA if count people with [min nodes-link-active-age <= 13] > 0 [print "age below"] ]
     print (list "completed run" run_num "of" maxRun "; timer" timer)
     set run_num run_num + 1
   ]
@@ -71,8 +71,8 @@ PLOT
 1011
 948
 CD4 count at diagnosis - Heterosexuals
-NIL
-NIL
+Time
+Proportion
 0.0
 10.0
 0.0
@@ -81,31 +81,30 @@ true
 true
 "" ""
 PENS
-"<=200" 1.0 0 -16777216 true "" ""
-"200-350" 1.0 0 -13345367 true "" ""
-"350-500" 1.0 0 -5825686 true "" ""
-">500" 1.0 0 -10899396 true "" ""
+"<=200" 1.0 0 -16777216 true "" "plot count people with [CD4-diagnosis <= 200 and stage > 2 and sex <= 2 and dead = 0] / count people with [stage > 2 and sex <= 2 and dead = 0] "
+"200-350" 1.0 0 -13345367 true "" "plot count people with [CD4-diagnosis <= 350 and CD4-diagnosis > 200 and stage > 2 and sex <= 2 and dead = 0] / count people with [stage > 2 and sex <= 2 and dead = 0] "
+"350-500" 1.0 0 -5825686 true "" "plot count people with [CD4-diagnosis <= 500 and CD4-diagnosis > 350 and stage > 2 and sex <= 2 and dead = 0] / count people with [stage > 2 and sex <= 2 and dead = 0] "
+">500" 1.0 0 -10899396 true "" "plot count people with [CD4-diagnosis > 500 and stage > 2 and sex <= 2 and dead = 0] / count people with [stage > 2 and sex <= 2 and dead = 0] "
 
 PLOT
-699
-942
-1013
-1067
-People living with HIV/AIDS
-Years
-Number
+379
+812
+693
+937
+Distriution of people living with HIV/AIDS
+Time
+Proportion
 0.0
 10.0
 0.0
-10.0
+1.0
 true
 true
 "" ""
 PENS
-"MSM" 1.0 0 -13791810 true "" ""
-"Heterosexual-female" 1.0 0 -13345367 true "" ""
-"ALL" 1.0 0 -16777216 true "" ""
-"Heterosexual-male" 1.0 0 -10899396 true "" ""
+"MSM" 1.0 0 -13791810 true "" "plot count people with [sex = 3 and dead = 0] / count people with [dead = 0]"
+"Heterosexual-female" 1.0 0 -13345367 true "" "plot count people with [sex = 1 and dead = 0] / count people with [dead = 0]"
+"Heterosexual-male" 1.0 0 -14439633 true "" "plot count people with [sex = 2 and dead = 0] / count people with [dead = 0]"
 
 INPUTBOX
 1032
@@ -119,58 +118,36 @@ time-unit
 Number
 
 PLOT
-0
-812
-440
-1070
-Transmissions
-NIL
-NIL
-0.0
-0.0
-0.0
-0.0
-true
-true
-"" ""
-PENS
-"ALL" 1.0 0 -16777216 true "" ""
-"HET-female" 1.0 0 -13345367 true "" ""
-"MSM" 1.0 0 -13791810 true "" ""
-"Trans per 10000 PLWH" 1.0 0 -5825686 true "" ""
-"HET-male" 1.0 0 -10899396 true "" ""
-
-PLOT
-443
-811
-693
-946
+1016
+809
+1388
+944
 Stage Distribution- Heterosexuals
-NIL
-NIL
+Time
+Proportion
 0.0
 10.0
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"acute-unaware" 1.0 0 -16777216 true "" ""
-"non-acute-unaware" 1.0 0 -7500403 true "" ""
-"aware-no care" 1.0 0 -2674135 true "" ""
-"aware-care-no ART" 1.0 0 -955883 true "" ""
-"ART-not suppressed" 1.0 0 -1184463 true "" ""
-"ART-suppressed" 1.0 0 -10899396 true "" ""
+"acute-unaware" 1.0 0 -16777216 true "" "plot count people with [stage = 1 and dead = 0 and sex <= 2] / count people with [dead = 0 and sex <= 2] "
+"non-acute-unaware" 1.0 0 -7500403 true "" "plot count people with [stage = 2 and dead = 0 and sex <= 2] / count people with [dead = 0 and sex <= 2] "
+"aware-no care" 1.0 0 -2674135 true "" "plot count people with [stage = 3 and dead = 0 and sex <= 2] / count people with [dead = 0 and sex <= 2] "
+"aware-care-no ART" 1.0 0 -955883 true "" "plot count people with [stage = 4 and dead = 0 and sex <= 2] / count people with [dead = 0 and sex <= 2] "
+"ART-not suppressed" 1.0 0 -1184463 true "" "plot count people with [stage = 5 and dead = 0 and sex <= 2] / count people with [dead = 0 and sex <= 2] "
+"ART-suppressed" 1.0 0 -10899396 true "" "plot count people with [stage = 6 and dead = 0 and sex <= 2] / count people with [dead = 0 and sex <= 2] "
 
 PLOT
 1015
 947
 1390
-1068
+1080
 Stage Distribution- MSM
-NIL
-NIL
+Time
+Proportion
 0.0
 10.0
 0.0
@@ -179,21 +156,21 @@ true
 true
 "" ""
 PENS
-"acute-unaware" 1.0 0 -16777216 true "" ""
-"non-acute-unaware" 1.0 0 -7500403 true "" ""
-"aware-no care" 1.0 0 -2674135 true "" ""
-"aware-care-no ART" 1.0 0 -955883 true "" ""
-"ART-not suppressed" 1.0 0 -1184463 true "" ""
-"ART-suppressed" 1.0 0 -10899396 true "" ""
+"acute-unaware" 1.0 0 -16777216 true "" "plot count people with [stage = 1 and dead = 0 and sex = 3] / count people with [dead = 0 and sex = 3] "
+"non-acute-unaware" 1.0 0 -7500403 true "" "plot count people with [stage = 2 and dead = 0 and sex = 3] / count people with [dead = 0 and sex = 3] "
+"aware-no care" 1.0 0 -2674135 true "" "plot count people with [stage = 3 and dead = 0 and sex = 3] / count people with [dead = 0 and sex = 3] "
+"aware-care-no ART" 1.0 0 -955883 true "" "plot count people with [stage = 4 and dead = 0 and sex = 3] / count people with [dead = 0 and sex = 3] "
+"ART-not suppressed" 1.0 0 -1184463 true "" "plot count people with [stage = 5 and dead = 0 and sex = 3] / count people with [dead = 0 and sex = 3] "
+"ART-suppressed" 1.0 0 -10899396 true "" "plot count people with [stage = 6 and dead = 0 and sex = 3] / count people with [dead = 0 and sex = 3] "
 
 PLOT
-435
-948
-703
-1068
+695
+950
+1013
+1070
 CD4 count at diagnosis - MSM
-NIL
-NIL
+Time
+Proportion
 0.0
 10.0
 0.0
@@ -202,33 +179,10 @@ true
 true
 "" ""
 PENS
-"<=200" 1.0 0 -16777216 true "" ""
-"200-350" 1.0 0 -13345367 true "" ""
-"350-500" 1.0 0 -5825686 true "" ""
-">500" 1.0 0 -10899396 true "" ""
-
-PLOT
-1014
-807
-1382
-945
-Proportion transmissions in stage
-NIL
-NIL
-0.0
-10.0
-0.0
-1.0
-true
-true
-"" ""
-PENS
-"acute-unaware" 1.0 0 -16777216 true "" ""
-"non-acute-unaware" 1.0 0 -7500403 true "" ""
-"aware-no care" 1.0 0 -2674135 true "" ""
-"aware-care-no ART" 1.0 0 -955883 true "" ""
-"ART-not suppressed" 1.0 0 -1184463 true "" ""
-"ART-suppressed" 1.0 0 -10899396 true "" ""
+"<=200" 1.0 0 -16777216 true "" "plot count people with [CD4-diagnosis <= 200 and stage > 2 and sex = 3 and dead = 0] / count people with [stage > 2 and sex = 3 and dead = 0] "
+"200-350" 1.0 0 -13345367 true "" "plot count people with [CD4-diagnosis <= 350 and CD4-diagnosis > 200 and stage > 2 and sex = 3 and dead = 0] / count people with [stage > 2 and sex = 3 and dead = 0] "
+"350-500" 1.0 0 -5825686 true "" "plot count people with [CD4-diagnosis <= 500 and CD4-diagnosis > 350 and stage > 2 and sex = 3 and dead = 0] / count people with [stage > 2 and sex = 3 and dead = 0] "
+">500" 1.0 0 -10899396 true "" "plot count people with [CD4-diagnosis > 500 and stage > 2 and sex = 3 and dead = 0] / count people with [stage > 2 and sex = 3 and dead = 0] "
 
 MONITOR
 1504
@@ -303,24 +257,6 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "plot  selected-agents / (selected-agents + selected-nonagents)"
 
-PLOT
-1551
-941
-1751
-1126
-trackTotalPop MSM
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot trackTotalPop"
-
 MONITOR
 1424
 1035
@@ -359,7 +295,7 @@ INPUTBOX
 935
 178
 initial-infected
-1000.0
+200.0
 1
 0
 Number
@@ -410,7 +346,7 @@ TEXTBOX
 51
 1902
 375
-*simulation-years: number of years to simulate from year 2006;\n*maxRun: number of simulation iterations\n*initial-infected: HIV population size prior to dryrun. \n*dry_run_1_duration: dry run for intiating network dynamics, clock will not update during this period\n(duration of dry-run 2: defined in model as = termination ticks - (simulation-years * time-unit) dry run for initializating epidemic and network feature dynamics; clock will update during this period.) \n*time-unit: 12 implies time step is monthly\n*first-year: first year of simulation after both dry runs.\n\nDefaults: \n*first-year: 2006\n*simulation-years: 11 (so will simulate 2006 to 2017)\n*termination-ticks: 240\n*dry_run_1_duration: 50\n*initial-infected: 1000 (take ~30 mins for 30 runs parallel run using Netlogo BehaviorSPace on Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz).(Generates ~400 HIV infected persons by end of simulation). For low computational testing, set value to small number ~200, although sometimes this can create an error if sample is too small for intended distribution, however, probbaility of error is low for 200, so if error, just re-run. 
+*simulation-years: number of years to simulate from year 2006;\n*maxRun: number of simulation iterations\n*initial-infected: HIV population size prior to dryrun. \n*dry_run_1_duration: dry run for intiating network dynamics, clock will not update during this period\n(duration of dry-run 2: defined in model as = termination ticks - (simulation-years * time-unit) dry run for initializating epidemic and network feature dynamics; clock will update during this period.) \n*time-unit: 12 implies time step is monthly\n*first-year: first year of simulation after both dry runs.\n\nDefaults: \n*first-year: 2006\n*simulation-years: 11 (so will simulate 2006 to 2017)\n*termination-ticks: 240\n*dry_run_1_duration: 50\n*initial-infected: 1000 (take ~30 mins for 30 runs parallel run using Netlogo BehaviorSPace on Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz).(Generates ~3500 HIV infected persons by end of simulation). For low computational testing, set value to small number ~200, although sometimes this can create an error if sample is too small for intended distribution, however, probbaility of error is low for 200, so if error, just re-run. 
 13
 0.0
 1
@@ -523,7 +459,7 @@ Number
 ## GENERAL
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
-* The model is calibrated to simulate HIV in the United States for the period 20o6 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
+* The model is calibrated to simulate HIV in the United States for the period 2006 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
 
 ## COMPUTATIONAL
 * Open model in Netlogo
@@ -562,10 +498,10 @@ National Institute of Allergy and Infectious Diseases of the National Institutes
 
 ### RELATED PUBLICATIONS
 
-Eden, M., Castonguay, R., Munkbat*, B., Balasubramanian, H., Gopalappa, C., Agent-based evolving network modeling: a new simulation method for modeling low prevalence infectious diseases, Health Care Management Science, 24, 623–639 (2021). https://doi.org/10.1007/s10729-021-09558-0 
+Eden, M., Castonguay, R., Munkbat, B., Balasubramanian, H., Gopalappa, C., Agent-based evolving network modeling: a new simulation method for modeling low prevalence infectious diseases, Health Care Management Science, 24, 623–639 (2021). https://doi.org/10.1007/s10729-021-09558-0 
 
 
-Singh*, S., France, A. M., Chen, Y-H, Farnham, P. G., Oster, A. M., Gopalappa, C., Progression and Transmission of HIV (PATH4.0): A new agent-based evolving network simulation for modeling HIV transmission clusters; Mathematical Biosciences and Engineering, 18 (3), 2021 doi: 10.3934/mbe.2021109
+Singh, S., France, A. M., Chen, Y-H, Farnham, P. G., Oster, A. M., Gopalappa, C., Progression and Transmission of HIV (PATH4.0): A new agent-based evolving network simulation for modeling HIV transmission clusters; Mathematical Biosciences and Engineering, 18 (3), 2021 doi: 10.3934/mbe.2021109
 
 Y. H. Chen, A. M. France, P. G. Farnham, S. L. Sansom, C. Gopalappa, A. Oster., Replicating HIV Transmission Clusters in a U.S. HIV Agent-Based Model[abstract]. In: Abstracts: SMDM 40th Annual Meeting; 2018 Oct; Montréal, Québec, Canada. 
 
