@@ -2,7 +2,7 @@
 ## GENERAL
 PATH 4.0 (progression and transmission of HIV) simulation model 
 Developed in Netlogo 6.2.2 https://ccl.northwestern.edu/netlogo/ 
-* The model is calibrated to simulate HIV in the United States for the period 20o6 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
+* The model is calibrated to simulate HIV in the United States for the period 2006 to 2017. The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software.
 
 ## COMPUTATIONAL
 * Open model in Netlogo
