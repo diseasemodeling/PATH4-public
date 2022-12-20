@@ -54,7 +54,8 @@ Chaitra Gopalappa, PhD (chaitrag@umass.edu)
 Associate Professor, Mechanical and Industrial Engineering, UMass Amherst 
 Associate Professor, Commonwealth Honors College, UMass Amherst    
 Lab website:   https://diseasemodeling.github.io/   
-Twitter: @chaitraGopalapa Instagram: @chaitra_gopalappa
+[LinkedIn](https://www.linkedin.com/in/chaitra-gopalappa-18bb181a/) | [ResearchGate](https://www.researchgate.net/profile/Chaitra_Gopalappa) |
+Mastodan: @chaitra_gopalappa@home.social | Instagram: @chaitra_gopalappa 
 
 ### LICENSE
 The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software. Contact author for interest in collaborative work.
