@@ -31,23 +31,23 @@ to link-activation-details [M V sex-of-infected-node]
     matrix:set-column m2 0 (matrix:get-column M j);; the neighbors index
 
     let d matrix:get (matrix:times m1 m2) 0 0 ;; random age of the neighbor
-    
+    ;print (list "d1=" d)
     ifelse d = 0 [;; if optimization model did not fnd solution set age lowest age group 
-      set d (item 0 age-group-lb + random (item 0 age-group-ub - item 1 age-group-lb))
+      set d (item 0 age-group-lb + random (item 0 age-group-ub - item 0 age-group-lb) + 1)
       set notOptimizedCounter  notOptimizedCounter + 1 ] 
     [set OptimizedCounter  OptimizedCounter + 1]
-    
+    ;print (list "d2=" d)
     set neighbors-link-active-age lput d neighbors-link-active-age
     
     ;; Determine link active age of new infected node;;
     let index-age return-age-index item j neighbors-link-active-age ;; index-age is age of neighbor at which link is active
     let rand random-float last (matrix:get-column V index-age); draw a random number between 0 ad lasst value of row
-    let d2 random-age-for-index 0
+    let d2_index random-age-for-index 0
     let found false 
     let k length (matrix:get-column V index-age) - 1
     while [k >= 0 and found = false][
       if rand > matrix:get V k index-age [
-        set d2 (random-age-for-index k + 1) + (( random time-unit)/ time-unit)
+        set d2_index (random-age-for-index k ) + (( random time-unit)/ time-unit)
         set found true
       ]
       set k k - 1
@@ -56,8 +56,8 @@ to link-activation-details [M V sex-of-infected-node]
     
     ifelse random-float 1 <= item sex-of-infected-node prop-concurrency and concurrency-model 
       [let length_concurrency random-exponential (item sex-of-infected-node concurrency-lambda) 
-        set nodes-link-active-age lput (d2 - length_concurrency) nodes-link-active-age];;add concurrency in years
-    [set nodes-link-active-age lput d2 nodes-link-active-age]
+        set nodes-link-active-age lput max( list (item 0 age-group-lb + 1) (d2_index - length_concurrency)) nodes-link-active-age];;add concurrency in years
+    [set nodes-link-active-age lput d2_index nodes-link-active-age]
     
     ;; Determine Time-LInk-Active-begin
     set time-link-active-begin lput round((item j nodes-link-active-age - age) * time-unit + ticks) time-link-active-begin

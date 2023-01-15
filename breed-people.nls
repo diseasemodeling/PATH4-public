@@ -255,6 +255,8 @@ people-own [
   AIDS-at-diagnosis?
   AIDS-within-6mon?
  
+ ; muli-disease
+  D2
 ]
 
 

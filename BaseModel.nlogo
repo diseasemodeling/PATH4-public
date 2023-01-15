@@ -872,7 +872,7 @@ NetLogo 6.2.2
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="experiment" repetitions="30" runMetricsEveryStep="true">
+  <experiment name="experiment" repetitions="5" runMetricsEveryStep="true">
     <setup>setupECNA</setup>
     <go>runECNA</go>
     <exitCondition>ticks &gt; termination-ticks</exitCondition>

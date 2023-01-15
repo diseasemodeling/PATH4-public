@@ -73,7 +73,10 @@ globals [
   susceptible-degree-dist-mat-HETM
   susceptible-degree-dist-mat-HETF
   susceptible-degree-dist-mat-MSM
-  
+  ;;track negatve birth cohorts (if future partners age is not in current cohort draw from this 
+  birth-cohort-HETF
+  birth-cohort-HETM
+  birth-cohort-MSM
   
   ;num-exposed-sus ;Does not influence results, Maximum number of agents that could get infected at a timestep
   num-new-contacts ;Could be modified, Number of contacts needed to evolve an agent's network
@@ -173,7 +176,7 @@ to create-sexual-network [my_output low-bound high-bound myLocID numAges sex-of-
         ;let eligible-agents count-susceptible-agents chosen-bin 
         ;let eligible-agents count-susceptible-agents2 chosen-bin (item j age-of-neighbors) (item j neighbors-link-active-age) 
         ;let eligible-agents susceptible-agents-location chosen-bin (item j age-of-neighbors) (item j neighbors-link-active-age) locationID
-        let eligible-agents susceptible-agents-location-sex chosen-bin (item j age-of-neighbors) (item j neighbors-link-active-age) locationID sex-of-neighbor
+        let eligible-agents susceptible-agents-sex chosen-bin (item j age-of-neighbors) (item j neighbors-link-active-age) locationID sex-of-neighbor
         
         let location-mixing HF_juri_mix
         if sex = 1 or sex = 4 [ set location-mixing HF_juri_mix]
@@ -190,25 +193,48 @@ to create-sexual-network [my_output low-bound high-bound myLocID numAges sex-of-
         
         ;;ASSUME ENDLESS SUPPLY OF NON_AGENTS IN EACH JURI- WORKS AS HIV IS LOW PREVALENCE AND JURIS ARE PSEUDO IN PATH 4-2021 PUBLICATION. FUTURE VERSIONS HAVE COMPARTMENTAL MODEL ALSO SPLIT BY JURIS  
          ;let eligible-nonagents matrix:get susceptible-degree-dist-mat index-of-age-group chosen-bin 
+        ifelse index-of-age-group >= 0 [
         if sex-of-neighbor  = 1 or sex-of-neighbor = 4 [set eligible-nonagents (matrix:get susceptible-degree-dist-mat-HETF index-of-age-group chosen-bin) / num-jurisdictions ] ; HETF
         if sex-of-neighbor  = 2 or sex-of-neighbor = 5 [set eligible-nonagents (matrix:get susceptible-degree-dist-mat-HETM index-of-age-group chosen-bin) / num-jurisdictions] ;HETM
         if sex-of-neighbor  = 3 or sex-of-neighbor = 6 [set eligible-nonagents (matrix:get susceptible-degree-dist-mat-MSM index-of-age-group chosen-bin) / num-jurisdictions]  ;MSM
+        ]
+        [  
+        if sex-of-neighbor  = 1 or sex-of-neighbor = 4 [set eligible-nonagents (matrix:get birth-cohort-HETF (100 + index-of-age-group) chosen-bin) / num-jurisdictions ] ; HETF
+        if sex-of-neighbor  = 2 or sex-of-neighbor = 5 [set eligible-nonagents (matrix:get birth-cohort-HETM (100 + index-of-age-group) chosen-bin) / num-jurisdictions] ;HETM
+        if sex-of-neighbor  = 3 or sex-of-neighbor = 6 [set eligible-nonagents (matrix:get birth-cohort-MSM (100 + index-of-age-group) chosen-bin) / num-jurisdictions]  ;MSM
+  
+        ]
+        
         
         set eligible-nonagents-count eligible-nonagents-count + eligible-nonagents ;NOT USED FOR SELECTION ALGO; INFORMATIONAL USE TO UNDERSTAND SIZE  COMPARED WITH AGENTS
         
         ;;DETERMINE IF NEW PARTNER IS SELECTED FROM AGENT OR NON_AGENT
         if sum-eligible-agents + eligible-nonagents > 0[ 
-          ifelse random (sum-eligible-agents + eligible-nonagents) > eligible-nonagents 
-            [                                                                                                                                                                             ;equal prob of choosing eligible agents and non-agents
-            set selected-agents selected-agents + 1 
-            set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID]
+          ;ifelse random (sum-eligible-agents + eligible-nonagents) > eligible-nonagents  ;equal prob of choosing eligible agents and non-agents
+          let cluster_prop1 0;0.7 ;probability of clustering within broader social group
+          ifelse random (sum-eligible-agents + eligible-nonagents) > eligible-nonagents or (sum-eligible-agents > 0 and  ticks > termination-ticks - (simulation-years - (first-year - 2006))   * time-unit
+            and random-float 1 < cluster_prop1) ;prob of choosing among agents weighted according to additional network features;; USEFUL FOR SENSITIVITY TEST OF CLUSTERS
+           [                                                                                                                                                                            
+            set selected-agents selected-agents + 1
+           let dist_cluster 0;0.7 
+            ifelse random-float 1 < dist_cluster and ticks > termination-ticks - (simulation-years - (first-year - 2006)) * time-unit ;;chance of clustering within immediate social group
+            [set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID + 1 / (1 + min (list nw:distance-to turtle infected-node-who 100000))]] ;; randomly pick a susceptible agent weighted by their locationID using location-mixing matrix only or additionally weighted by distance to node
+            [set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID ]]                                                                                                     
+            ;set new-contacts rnd:weighted-one-of eligible-agents [matrix:get location-mixing myLocID locationID]
           ]
           [
             set selected-nonagents selected-nonagents + 1
             ;;decrement value in compartment - indicating persons moved from compartment to network 
-            if sex-of-neighbor  = 1 or sex-of-neighbor = 4 [matrix:set susceptible-degree-dist-mat-HETF index-of-age-group chosen-bin ((matrix:get susceptible-degree-dist-mat-HETF index-of-age-group chosen-bin) - 1)] ;HETF
-            if sex-of-neighbor  = 2 or sex-of-neighbor = 5 [matrix:set susceptible-degree-dist-mat-HETM index-of-age-group chosen-bin ((matrix:get susceptible-degree-dist-mat-HETM index-of-age-group chosen-bin) - 1)] ;HETM
-            if sex-of-neighbor  = 3 or sex-of-neighbor = 6 [matrix:set susceptible-degree-dist-mat-MSM index-of-age-group chosen-bin ((matrix:get susceptible-degree-dist-mat-MSM index-of-age-group chosen-bin) - 1)] ;MSM
+            ifelse index-of-age-group >= 0 [
+              if sex-of-neighbor  = 1 or sex-of-neighbor = 4 [matrix:set susceptible-degree-dist-mat-HETF index-of-age-group chosen-bin ((matrix:get susceptible-degree-dist-mat-HETF index-of-age-group chosen-bin) - 1)] ;HETF
+              if sex-of-neighbor  = 2 or sex-of-neighbor = 5 [matrix:set susceptible-degree-dist-mat-HETM index-of-age-group chosen-bin ((matrix:get susceptible-degree-dist-mat-HETM index-of-age-group chosen-bin) - 1)] ;HETM
+              if sex-of-neighbor  = 3 or sex-of-neighbor = 6 [matrix:set susceptible-degree-dist-mat-MSM index-of-age-group chosen-bin ((matrix:get susceptible-degree-dist-mat-MSM index-of-age-group chosen-bin) - 1)] ;MSM
+            ]
+            [
+              if sex-of-neighbor  = 1 or sex-of-neighbor = 4 [matrix:set  birth-cohort-HETF (100 + index-of-age-group)  chosen-bin ((matrix:get  birth-cohort-HETF (100 + index-of-age-group)  chosen-bin) - 1)] ;HETF
+              if sex-of-neighbor  = 2 or sex-of-neighbor = 5 [matrix:set  birth-cohort-HETM (100 + index-of-age-group)  chosen-bin ((matrix:get  birth-cohort-HETM (100 + index-of-age-group)  chosen-bin) - 1)] ;HETM
+              if sex-of-neighbor  = 3 or sex-of-neighbor = 6 [matrix:set  birth-cohort-MSM (100 + index-of-age-group)  chosen-bin ((matrix:get  birth-cohort-MSM (100 + index-of-age-group)  chosen-bin) - 1)] ;MSM
+            ]
             
             set new-contacts one-of non-agent-susceptibles ;non-agent-susceptibles are dummy nodes- to move a person  from compartment to network, instead of 'create' nodes every time, computaonally more efficient to create dummy nodes and pick from there when needed 
             ask new-contacts[
@@ -389,14 +415,15 @@ to-report return-random-degree
 end
 
 to-report count-susceptible-agents3 [bin my-age active-age sex-of-neighbor]
+  ;return number of persons who match age and bin-degree
   let value 0
   set value count susceptibles with [desired-degree > item (bin - 1) degree-dist-Bin and desired-degree <= item bin degree-dist-Bin and (desired-degree - count my-links) > 0 
     and  return-age-index susceptible-age = return-age-index my-age and matrix:get age-link-active 0 return-age-index(active-age) >= 1 and sex = sex-of-neighbor];;non-agents in degree-bin, age-group, and unassigned link in link-active-age-group ar eligible
   report value
 end
 
-to-report susceptible-agents-location-sex [bin my-age active-age loc-ID sex-of-neighbor]
-  ;return weighted number of person who match age and bin-degree, weighted by their location mixing
+to-report susceptible-agents-sex [bin my-age active-age loc-ID sex-of-neighbor]
+  ;return person who match age and bin-degree
   let value 0
   let eligible-list susceptibles with [desired-degree > item (bin - 1) degree-dist-Bin and desired-degree <= item bin degree-dist-Bin and (desired-degree - count my-links) > 0 
     and  return-age-index susceptible-age = return-age-index my-age and matrix:get age-link-active 0 return-age-index(active-age) >= 1 and sex = sex-of-neighbor];;non-agents in degree-bin, age-group, and unassigned link in link-active-age-group ar eligible
@@ -431,13 +458,10 @@ to reset ;Reset turtle-own varibales
   ask people [
     set time-infected time-infected + 1
     ;set time-in-simulation time-in-simulation + 1
-    ;set number-exposures 0
+    
   ]
   ask susceptibles [
-    ;set eligible? true
-    set used? false
     ; set time-in-simulation time-in-simulation + 1
-    ; set number-exposures 0
   ] 
 end
 
