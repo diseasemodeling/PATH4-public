@@ -772,7 +772,7 @@ to setup-static-globals
   set age-weighted-aware [.49 .49 .71 .71 .85 .85 .93]; uses  age-group-lb and age-group-ub ; proportion diagnosed by age-groups
   set age-weighted-VLS [0.512 .512 0.542 .542 0.577 .577 0.626];uses  age-group-lb and age-group-ub ; proportion with VLS by age-groups
   
-  set age-group-lb [13 17 24 29 34 39 44]; used for age-mixing and lifetime partnership, and age-weighted-LTC  age-weighted-aware age-weighted-VLS
+  set age-group-lb [12 17 24 29 34 39 44]; used for age-mixing and lifetime partnership, and age-weighted-LTC  age-weighted-aware age-weighted-VLS
   set age-group-ub [17 24 29 34 39 44 65]; used for age-mixing and lifetime partnership, and age-weighted-LTC  age-weighted-aware age-weighted-VLS
   
   set cumulative-stage 
