@@ -160,7 +160,7 @@ to create-sexual-network [my_output low-bound high-bound myLocID numAges sex-of-
   ;;;CREATE NEIGHBORS;;;
   set j 0
   while [j < num-new-contacts][
-    if item j time-link-active-end > ticks[
+    if item j time-link-active-end > ticks[; create only those links that will be active in the future (to reduce computaional time)
       let new-contacts nobody
       ;let chosen-bin return-chosen-Bin desired-neighbor-degree1
       let desired-neighbor-degree1 item j desired-neighbor-degree-list
