@@ -137,7 +137,7 @@ to initializeTrans;; Use initializeTrans for PATH/ECNA 4.0 ;; Use initialize-tra
   set index? false
   set stage 1
   setDiagTime ;in initialize-transmissions.nls
-  
+  update-behavior ; for newly infected so they dont have to wait for next year when it is updated for all
   
 end
 
