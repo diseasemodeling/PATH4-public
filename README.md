@@ -40,11 +40,11 @@ transmissions-ECNA.nls
 National Institute of Allergy and Infectious Diseases of the National Institutes of Health under Award Number R01AI127236. The funding agreement ensured the authors' independence in designing the study, interpreting the data, writing, and publishing the report.
 
 ### RELATED PUBLICATIONS
+France, A.M., Panneer, N., Farnham, P.G., Oster, A.M., Viguerie, A., and Gopalappa, C. “Extent and composition of molecular HIV sexual transmission clusters in a nationally representative simulation model indicate intervention opportunities,” JAIDS, 95(4):p 355-361, April 1, 2024. DOI:[10.1097/QAI.0000000000003367](https://doi.org/10.1097/qai.0000000000003367)
 
 Eden, M., Castonguay, R., Munkbat*, B., Balasubramanian, H., Gopalappa, C., Agent-based evolving network modeling: a new simulation method for modeling low prevalence infectious diseases, Health Care Management Science, 24, 623–639 (2021). https://doi.org/10.1007/s10729-021-09558-0 
 
-
-Singh*, S., France, A. M., Chen, Y-H, Farnham, P. G., Oster, A. M., Gopalappa, C., Progression and Transmission of HIV (PATH4.0): A new agent-based evolving network simulation for modeling HIV transmission clusters; Mathematical Biosciences and Engineering, 18 (3), 2021 doi: 10.3934/mbe.2021109
+Singh*, S., France, A. M., Chen, Y-H, Farnham, P. G., Oster, A. M., Gopalappa, C., Progression and Transmission of HIV (PATH4.0): A new agent-based evolving network simulation for modeling HIV transmission clusters; Mathematical Biosciences and Engineering, 18 (3), 2021 DOI: [10.3934/mbe.2021109](https://doi.org/10.3934/mbe.2021109)
 
 Y. H. Chen, A. M. France, P. G. Farnham, S. L. Sansom, C. Gopalappa, A. Oster., Replicating HIV Transmission Clusters in a U.S. HIV Agent-Based Model[abstract]. In: Abstracts: SMDM 40th Annual Meeting; 2018 Oct; Montréal, Québec, Canada. 
 
@@ -55,7 +55,7 @@ Associate Professor, Mechanical and Industrial Engineering, UMass Amherst
 Associate Professor, Commonwealth Honors College, UMass Amherst    
 Lab website:   https://diseasemodeling.github.io/   
 [LinkedIn](https://www.linkedin.com/in/chaitra-gopalappa-18bb181a/) | [ResearchGate](https://www.researchgate.net/profile/Chaitra_Gopalappa) |
-Mastodan: @chaitra_gopalappa@home.social | Instagram: @chaitra_gopalappa 
+Instagram: @chaitra_gopalappa 
 
 ### LICENSE
 The model can be used for academic and research purposes with indepth knowledge of PATH mathematical methods and modeling in Netlogo software. Contact author for interest in collaborative work.
